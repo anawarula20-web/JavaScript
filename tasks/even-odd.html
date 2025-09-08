@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 class="box"></h2>
+    <script>
+        let number = prompt("Enter a number to check whether even or odd");
+
+        if(number % 2 === 0) {
+            result = `${number} is an even number`;
+        } else {
+            result = `${number} is an odd number`;
+        }
+
+        document.querySelector(".box").innerHTML = result;
+
+    </script>
+</body>
+</html>
