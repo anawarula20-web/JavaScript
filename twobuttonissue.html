@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="red">Red</button>
+    <button id="green">Green</button>
+
+    <script>
+        function clickHandler(color) {
+            return function() {
+                document.body.style.backgroundColor = `${color}`;
+            };
+        }
+
+        document.getElementById("red").onclick = clickHandler("red");
+        document.getElementById("green").onclick = clickHandler("green");
+
+    //    1. जब आप clickHandler("red") कॉल करते हो:
+    //      * Outer function clickHandler चलकर एक नया inner function वापस करता है।
+    //      * उस inner function को red variable का reference याद रहता है।
+
+    //    2. document.getElementById("red").onclick = clickHandler("red");
+    //      * onclick को वही inner function असाइन हो गया।
+    //      * बाद में जब user बटन पर क्लिक करेगा, outer function तो पहले ही खत्म हो चुका होगा, लेकिन inner function के पास color = "red" की value अब भी स्टोर है।
+
+    //    3. यही reason है कि बटन क्लिक करने पर background "red" या "green" हो जाता है।
+    //    4. Inner function अपने साथ color variable का closed-over environment ले जा रहा है।
+    //        यही concept closure कहलाता है।
+
+
+    </script>
+</body>
+</html>
