@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shape Generator</title>
+  <style>
+    /* --- Global reset --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+      font-family: "Segoe UI", sans-serif;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    /* --- Controls --- */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: #ffffff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    select,
+    input[type="number"],
+    input[type="submit"] {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    select:focus,
+    input[type="number"]:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    }
+
+    #generate {
+      background: #6366f1;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s;
+    }
+
+    #generate:hover {
+      background: #4f46e5;
+    }
+
+    /* --- Shape container --- */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      width: 100%;
+      justify-content: center;
+      padding: 1rem;
+      background: #fefefe;
+      border-radius: 12px;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+      min-height: 50vh;
+    }
+
+    /* --- Shapes --- */
+    .circle,
+    .square,
+    .rectangle {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .circle:hover,
+    .square:hover,
+    .rectangle:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #ef4444;
+    }
+
+    .square {
+      width: 100px;
+      height: 100px;
+      background-color: #22c55e;
+    }
+
+    .rectangle {
+      width: 150px;
+      height: 100px;
+      background-color: #3b82f6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shape Generator</h1>
+
+  <div class="controls">
+    <select id="shapeName">
+      <option value="circle">Circle</option>
+      <option value="square">Square</option>
+      <option value="rectangle">Rectangle</option>
+    </select>
+
+    <input type="number" id="shapeNumber" placeholder="Enter number" min="1" />
+    <input type="submit" id="generate" value="Generate" />
+  </div>
+
+  <div class="container"></div>
+
+  <script>
+    const generate = document.querySelector("#generate");
+    const container = document.querySelector(".container");
+    const shapeName = document.querySelector("#shapeName");
+    const shapeNumber = document.querySelector("#shapeNumber");
+
+    generate.addEventListener("click", () => {
+      container.innerHTML = ""; // Clear old shapes
+      const shapeValue = shapeName.value;
+      const numberValue = parseInt(shapeNumber.value);
+
+      if (!numberValue || numberValue < 1) return;
+
+      for (let i = 0; i < numberValue; i++) {
+        const div = document.createElement("div");
+        div.classList.add(shapeValue);
+        container.appendChild(div);
+      }
+    });
+  </script>
+</body>
+</html>
